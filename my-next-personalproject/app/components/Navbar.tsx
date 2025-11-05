@@ -19,8 +19,8 @@ export default function Navbar() {
 
         {/* Center: nav links */}
         <nav className="hidden md:flex gap-6 text-yellow-300 font-medium">
-          <Link href="#" className="hover:text-white">Booking</Link>
-          <Link href="/pricing" className="hover:text-white">Products</Link>
+          <Link href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo" className="hover:text-white">Booking</Link>
+          <Link href="/pricing" className="hover:text-white">Services</Link>
           <Link href="#" className="hover:text-white">Contact</Link>
           <Link href="#" className="hover:text-white">About Us</Link>
         </nav>
