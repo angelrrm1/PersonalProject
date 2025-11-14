@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import barberTools from './img/barberTools.jpg'
-import logoWolf from './img/logowolf.png'
+import logoGf from './img/logoGf.png'
 
 export default function Home() {
   return (
@@ -24,18 +24,19 @@ export default function Home() {
       {/* Contenido */}
       <div className="relative z-10 flex items-center justify-center px-4 py-20 md:py-0 h-full">
         <div className="text-center text-yellow-300 max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">
+
+          {/*<h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">
             Welcome to Barberia Godfather
-          </h1>
+          </h1> */}
 
           {/* Logo debajo del título */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-6 -mt-10">
             <Image
-              src={logoWolf}
+              src={logoGf}
               alt="Barbershop Godfather logo"
               width={160}
               height={160}
-              className="object-contain drop-shadow-[0_0_8px_rgba(255,215,0,0.3)]"
+              className="object-contain drop-shadow-[0_0_8px_rgba(255,215,0,0.3)] w-72 md:w-md"
             />
           </div>
 

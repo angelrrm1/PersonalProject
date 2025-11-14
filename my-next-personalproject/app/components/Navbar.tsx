@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import logoWolf from '../img/logowolf.png' 
+import logoGf from '../img/logoGf.png'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -33,7 +33,7 @@ export default function Navbar() {
           <Link className="flex items-center gap-3" href="/">
             <div className="w-12 h-12 relative">
               <Image
-                src={logoWolf}
+                src={logoGf}
                 alt="Godfather Barbershop logo"
                 fill
                 className="object-contain"
