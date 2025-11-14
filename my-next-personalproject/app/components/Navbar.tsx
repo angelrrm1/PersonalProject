@@ -42,13 +42,13 @@ export default function Navbar() {
               />
             </div>
             <div className="leading-tight">
-              <div className="text-white font-semibold text-sm">Godfather</div>
+              <div className="text-white font-semibold text-m">Godfather</div>
               <div className="text-yellow-300 text-xs tracking-wider">BARBERSHOP MONCLOA</div>
             </div>
           </Link>
 
           {/* Links desktop */}
-          <nav className="hidden md:flex gap-6 text-yellow-300 font-medium">
+          <nav className="hidden md:flex gap-6 text-yellow-300 font-2xl">
             <Link href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo" className="hover:text-white">Booking</Link>
             <Link href="/pricing" className="hover:text-white">Services</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
