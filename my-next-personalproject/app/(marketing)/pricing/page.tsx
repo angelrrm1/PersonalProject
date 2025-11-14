@@ -2,6 +2,8 @@
 import React from 'react'
 import { CheckCircle2, XCircle } from 'lucide-react'
 import ServicesCarousel from '@/app/components/ServicesCarousel'
+import barberToolsService from '@/app/img/barberToolsService.jpg'
+
 
 type ServiceSpec = string
 
@@ -17,6 +19,7 @@ interface ServiceCardProps {
 }
 
 export default function ServicesPage() {
+  
   const services: ServiceCardProps[] = [
     {
       title: "Men's Haircut",
@@ -119,30 +122,38 @@ export default function ServicesPage() {
   ]
 
   return (
-    <section className="container mx-auto px-4 py-12">
-      <div className="max-w-2xl mx-auto text-center mb-16">
-        <h1 className="text-4xl font-bold mb-4 text-white">Services</h1>
-        <p className="text-xl text-yellow-300">Premium barbershop experience</p>
-      </div>
+    <section
+      className="relative w-full min-h-screen bg-no-repeat bg-cover bg-center"
+      style={{ backgroundImage: `url(${barberToolsService.src})` }}
+    >
+      {/* Overlay para contraste */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* Carrusel con los servicios */}
-      <ServicesCarousel>
-        {services.map((service, idx) => (
-          <ServiceCard key={idx} {...service} />
-        ))}
-      </ServicesCarousel>
+      {/* Contenido centrado y con padding */}
+      <div className="container mx-auto px-4 py-12 relative z-10">
+        <div className="max-w-2xl mx-auto text-center mb-16">
+          <h1 className="text-4xl font-bold mb-4 text-white">Services</h1>
+          <p className="text-xl text-yellow-300">Premium barbershop experience</p>
+        </div>
 
-      <div className="max-w-3xl mx-auto mt-16 text-center bg-[#0b0b0b] rounded-lg p-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">Need something custom?</h2>
-        <p className="text-lg text-yellow-300 mb-8">
-          Tell us what you need and we’ll craft the perfect combo for you.
-        </p>
-        <button
-          disabled
-          className="inline-flex h-10 items-center justify-center rounded-md bg-yellow-500/60 px-8 py-2 text-sm font-medium text-black shadow cursor-not-allowed"
-        >
-          Contact Us
-        </button>
+        <ServicesCarousel>
+          {services.map((service, idx) => (
+            <ServiceCard key={idx} {...service} />
+          ))}
+        </ServicesCarousel>
+
+        <div className="max-w-3xl mx-auto mt-16 text-center bg-[#0b0b0b]/90 rounded-lg p-8">
+          <h2 className="text-2xl font-bold mb-4 text-white">Need something custom?</h2>
+          <p className="text-lg text-yellow-300 mb-8">
+            Tell us what you need and we’ll craft the perfect combo for you.
+          </p>
+          <button
+            disabled
+            className="inline-flex h-10 items-center justify-center rounded-md bg-yellow-500/60 px-8 py-2 text-sm font-medium text-black shadow cursor-not-allowed"
+          >
+            Contact Us
+          </button>
+        </div>
       </div>
     </section>
   )
@@ -160,11 +171,10 @@ function ServiceCard({
 }: ServiceCardProps) {
   return (
     <div
-      className={`rounded-lg p-6 relative h-full ${
-        highlighted
+      className={`rounded-lg p-6 relative h-full ${highlighted
           ? 'bg-[#111111] border-2 border-yellow-600 shadow-md'
           : 'bg-[#0b0b0b] border border-yellow-900 shadow-sm'
-      }`}
+        }`}
     >
       {badge && (
         <div className="absolute -top-3 -right-3 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
@@ -206,11 +216,10 @@ function ServiceCard({
 
       <button
         disabled
-        className={`w-full inline-flex h-10 items-center justify-center rounded-md px-8 py-2 text-sm font-medium shadow cursor-not-allowed ${
-          highlighted
+        className={`w-full inline-flex h-10 items-center justify-center rounded-md px-8 py-2 text-sm font-medium shadow cursor-not-allowed ${highlighted
             ? 'bg-yellow-500/60 text-black'
             : 'bg-transparent border border-yellow-700 text-yellow-300'
-        }`}
+          }`}
       >
         Book Now
       </button>
