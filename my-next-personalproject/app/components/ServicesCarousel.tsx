@@ -36,7 +36,7 @@ export default function ServicesCarousel({ children }: ServicesCarouselProps) {
       <button
         aria-label="Scroll left"
         onClick={() => scrollByAmount('left')}
-        className="hidden md:flex absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-[#111111]/90 border border-yellow-900 items-center justify-center hover:bg-[#111111] transition shadow-lg"
+        className="hidden md:flex absolute left-[-2rem] top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-[#111111]/90 border border-yellow-900 items-center justify-center hover:bg-[#111111] transition shadow-lg -ml-4"
       >
         <ChevronLeft className="h-5 w-5 text-yellow-300" />
       </button>
@@ -44,7 +44,7 @@ export default function ServicesCarousel({ children }: ServicesCarouselProps) {
       <button
         aria-label="Scroll right"
         onClick={() => scrollByAmount('right')}
-        className="hidden md:flex absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-[#111111]/90 border border-yellow-900 items-center justify-center hover:bg-[#111111] transition shadow-lg"
+        className="hidden md:flex absolute right-[-2rem] top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-[#111111]/90 border border-yellow-900 items-center justify-center hover:bg-[#111111] transition shadow-lg -mr-4"
       >
         <ChevronRight className="h-5 w-5 text-yellow-300" />
       </button>
@@ -53,12 +53,9 @@ export default function ServicesCarousel({ children }: ServicesCarouselProps) {
       <div
         ref={trackRef}
         className="
-          relative flex overflow-x-auto overflow-y-visible
-          scroll-smooth snap-x snap-mandatory
-          gap-8 md:gap-8
-          px-4 md:px-4
-          scroll-dark
-          justify-center md:justify-start
+            relative flex overflow-x-auto overflow-y-visible scroll-smooth snap-x snap-mandatory
+            gap-8 md:gap-8 px-4 md:px-4 justify-center md:justify-start
+            [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
         "
       >
         {React.Children.map(children, (child, i) => (

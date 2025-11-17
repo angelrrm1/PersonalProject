@@ -170,27 +170,31 @@ function ServiceCard({
   badge
 }: ServiceCardProps) {
   return (
-    <div
-      className={`rounded-lg p-6 relative h-full ${highlighted
-          ? 'bg-[#111111] border-2 border-yellow-600 shadow-md'
-          : 'bg-[#0b0b0b] border border-yellow-900 shadow-sm'
-        }`}
-    >
-      {badge && (
-        <div className="absolute -top-3 -right-3 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-          {badge}
-        </div>
-      )}
-
-      <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
-
-      <div className="mb-2">
-        <span className="text-3xl font-bold text-yellow-300">{price}</span>
-        {duration && <span className="ml-2 text-yellow-300"> • {duration}</span>}
+  <div
+    className={`relative h-full rounded-lg p-6 flex flex-col ${
+      highlighted
+        ? 'bg-[#111111] border-2 border-yellow-600 shadow-md'
+        : 'bg-[#0b0b0b] border border-yellow-900 shadow-sm'
+    }`}
+  >
+    {badge && (
+      // dentro del card (sin negativos) para que no se “corte”
+      <div className="absolute top-3 right-3 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
+        {badge}
       </div>
+    )}
 
-      <p className="text-yellow-300 mb-6">{description}</p>
+    <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
 
+    <div className="mb-2">
+      <span className="text-3xl font-bold text-yellow-300">{price}</span>
+      {duration && <span className="ml-2 text-yellow-300"> • {duration}</span>}
+    </div>
+
+    <p className="text-yellow-300 mb-6">{description}</p>
+
+    {/* CONTENIDO CRECE PARA EMPUJAR EL BOTÓN */}
+    <div className="flex-1">
       <ul className="space-y-2 mb-4">
         {includes.map((item, i) => (
           <li key={i} className="flex items-start">
@@ -213,16 +217,20 @@ function ServiceCard({
           </ul>
         </div>
       )}
-
-      <button
-        disabled
-        className={`w-full inline-flex h-10 items-center justify-center rounded-md px-8 py-2 text-sm font-medium shadow cursor-not-allowed ${highlighted
-            ? 'bg-yellow-500/60 text-black'
-            : 'bg-transparent border border-yellow-700 text-yellow-300'
-          }`}
-      >
-        Book Now
-      </button>
     </div>
-  )
+
+    {/* BOTÓN SIEMPRE AL FINAL */}
+    <button
+      disabled
+      className={`mt-auto w-full inline-flex h-10 items-center justify-center rounded-md px-8 py-2 text-sm font-medium shadow cursor-not-allowed ${
+        highlighted
+          ? 'bg-yellow-500/60 text-black'
+          : 'bg-transparent border border-yellow-700 text-yellow-300'
+      }`}
+    >
+      Book Now
+    </button>
+  </div>
+)
+
 }
