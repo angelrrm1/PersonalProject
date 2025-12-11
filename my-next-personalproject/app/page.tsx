@@ -131,22 +131,23 @@ export default function Home() {
       </section>
 
       {/* CARRUSEL DE PRODUCTOS — entre los dos heroes */}
-      <section className="relative z-30 -mt-12 md:-mt-20 mb-12">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-white mb-2">Premium Products</h2>
-            <p className="text-yellow-300 text-sm md:text-base">
-              Keep your Godfather finish sharp at home
-            </p>
-          </div>
+<section className="relative z-20 -mt-10 md:-mt-16 mb-12">
+  <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20">
+    <div className="text-center mt-10 mb-8">
+      <h2 className="text-3xl font-bold text-white mb-2">Premium Products</h2>
+      <p className="text-yellow-300 text-sm md:text-base">
+        Keep your Godfather finish sharp at home
+      </p>
+    </div>
 
-          <ServicesCarousel>
-            {products.map((product, index) => (
-              <ProductCard key={index} {...product} />
-            ))}
-          </ServicesCarousel>
-        </div>
-      </section>
+    <ServicesCarousel>
+      {products.map((product, index) => (
+        <ProductCard key={index} {...product} />
+      ))}
+    </ServicesCarousel>
+  </div>
+</section>
+
 
       {/* HERO INFERIOR — espejo visual */}
       <section className="relative min-h-[70vh] md:h-screen overflow-hidden bg-black">
