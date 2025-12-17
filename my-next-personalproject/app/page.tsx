@@ -102,7 +102,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent" />
 
         {/* Contenido */}
-        <div className="relative z-10 flex items-center justify-end px-4 py-20 mb-50 md:py-0 h-full">
+        <div className="relative z-10 flex items-center justify-end px-4 py-20 md:py-0 h-full">
           <div className="text-center text-yellow-300 max-w-3xl">
             <div className="flex justify-center mb-6 -mt-10">
               <Image
