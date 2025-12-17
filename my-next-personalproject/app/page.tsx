@@ -1,10 +1,20 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import ServicesCarousel from '@/app/components/ServicesCarousel'
 import heroTop from './img/heroTop.jpg'
 import barberTools from './img/barberTools.jpg'
 import logoGf from './img/logoGf.png'
+import c1 from './img/gallery/c1.jpg'
+import c2 from './img/gallery/c2.jpg'
+import c3 from './img/gallery/c3.jpg'
+import c4 from './img/gallery/c4.jpg'
+import c5 from './img/gallery/c5.jpg'
+import c6 from './img/gallery/c6.jpg'
+import c7 from './img/gallery/c7.jpg'
+import c8 from './img/gallery/c8.jpg'
+import c9 from './img/gallery/c9.jpg'
 
 type ProductCardProps = {
   name: string
@@ -82,6 +92,16 @@ const products: ProductCardProps[] = [
 ]
 
 export default function Home() {
+  const clientPhotos = [c1, c2, c3, c4, c5, c6, c7, c8, c9]
+  const [activeClient, setActiveClient] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveClient((prev: number) => (prev + 1) % clientPhotos.length)
+    }, 2000)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <>
       {/* HERO SUPERIOR */}
@@ -150,11 +170,12 @@ export default function Home() {
       </section>
 
       {/* HERO MEDIO */}
+      {/* HERO MEDIO — carrusel automático de clientes */}
       <section className="relative min-h-[70vh] md:h-screen overflow-hidden bg-black">
-        {/* Imagen de fondo optimizada */}
+        {/* Fondo */}
         <Image
           src={barberTools}
-          alt="Barber model background"
+          alt="Barber tools background"
           fill
           priority
           placeholder="blur"
@@ -162,14 +183,51 @@ export default function Home() {
           sizes="100vw"
         />
 
-        {/* Overlays para contraste */}
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 to-transparent" />
+        {/* Overlay para contraste */}
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/60 to-transparent" />
+        
+        {/* Carrusel gallery */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center px-4">
+          <div className="text-center p-0 mr-65 md:mb-12">
+            <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-yellow-400/80 mb-2">
+              The Godfather Experience
+            </p>
+            <h2 className="text-3xl mt-5 md:text-4xl font-bold text-white mb-3">
+              Our Clients
+            </h2>
+            <p className="text-yellow-300/90 mt-5 text-sm md:text-base max-w-xl mx-auto">
+              Real people. Real cuts. Crafted with precision and character.
+            </p>
+          </div>
 
+          <div className="  relative w-[230px] sm:w-[340px] md:w-[380px] h-[230px] sm:h-[340px] md:h-[420px] rounded-lg overflow-hidden border border-yellow-700 bg-black">
+            {clientPhotos.map((img, i) => (
+              <Image
+                key={i}
+                src={img}
+                alt={`Client cut ${i + 1}`}
+                fill
+                sizes="(max-width: 640px) 230px, (max-width: 1024px) 340px, 380px"
+                className={[
+                  'object-cover ',
+                  'transition-opacity duration-900 ease-in-out',
+                  'shadow-[0_25px_90px_rgba(0,0,0,0.75)]',
+                  'border border-yellow-500/20',
+                  i === activeClient ? 'opacity-100' : 'opacity-0',
+                ].join(' ')}
+                priority={i === 0}
+              />
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* HERO INFERIOR — espejo visual */}
       <section className="relative min-h-[70vh] md:h-screen overflow-hidden bg-black">
+        <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20">
+
+        </div>
         {/* Imagen rotada pero mismo fill */}
         <Image
           src={barberTools}
