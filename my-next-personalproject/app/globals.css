@@ -20,7 +20,7 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--background), black;
   color: var(--foreground);
   font-family: var(--font-zalando, 'Zalando Sans Expanded'), Arial, Helvetica, sans-serif;
 }

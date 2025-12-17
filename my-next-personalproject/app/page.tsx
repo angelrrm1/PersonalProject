@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import type { StaticImageData } from 'next/image'
 import ServicesCarousel from '@/app/components/ServicesCarousel'
 import heroTop from './img/heroTop.jpg'
 import barberTools from './img/barberTools.jpg'
@@ -152,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* CARRUSEL DE PRODUCTOS — entre los dos heroes */}
-      <section className="relative z-20 -mt-10 md:-mt-16 mb-12">
+      <section className="relative z-20 -mt-10 md:-mt-16 bg-black">
         <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20">
           <div className="text-center mt-10 mb-8">
             <h2 className="text-3xl font-bold text-white mb-2">Premium Products</h2>
@@ -169,7 +170,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HERO MEDIO */}
       {/* HERO MEDIO — carrusel automático de clientes */}
       <section className="relative min-h-[70vh] md:h-screen overflow-hidden bg-black">
         {/* Fondo */}
@@ -182,43 +182,29 @@ export default function Home() {
           className="object-cover object-center"
           sizes="100vw"
         />
-
-        {/* Overlay para contraste */}
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-black/65" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 to-transparent" />
         
-        {/* Carrusel gallery */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center px-4">
-          <div className="text-center p-0 mr-65 md:mb-12">
-            <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-yellow-400/80 mb-2">
-              The Godfather Experience
-            </p>
-            <h2 className="text-3xl mt-5 md:text-4xl font-bold text-white mb-3">
-              Our Clients
-            </h2>
-            <p className="text-yellow-300/90 mt-5 text-sm md:text-base max-w-xl mx-auto">
-              Real people. Real cuts. Crafted with precision and character.
-            </p>
-          </div>
+        {/* Contenido */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4 py-14 md:py-0">
+            {/* Header “Godfather style” */}
+            <div className="max-w-xl mx-auto md:mx-0 text-center md:text-left mb-8 md:mb-10">
+              <p className="text-xs uppercase tracking-[0.35em] text-yellow-400/80 mb-3">
+                The Godfather Experience
+              </p>
 
-          <div className="  relative w-[230px] sm:w-[340px] md:w-[380px] h-[230px] sm:h-[340px] md:h-[420px] rounded-lg overflow-hidden border border-yellow-700 bg-black">
-            {clientPhotos.map((img, i) => (
-              <Image
-                key={i}
-                src={img}
-                alt={`Client cut ${i + 1}`}
-                fill
-                sizes="(max-width: 640px) 230px, (max-width: 1024px) 340px, 380px"
-                className={[
-                  'object-cover ',
-                  'transition-opacity duration-900 ease-in-out',
-                  'shadow-[0_25px_90px_rgba(0,0,0,0.75)]',
-                  'border border-yellow-500/20',
-                  i === activeClient ? 'opacity-100' : 'opacity-0',
-                ].join(' ')}
-                priority={i === 0}
-              />
-            ))}
+              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+                Our Clients
+              </h2>
+
+              <p className="text-yellow-300/90 text-sm md:text-base leading-relaxed">
+                Real people. Real cuts. Crafted with precision and character.
+              </p>
+            </div>
+
+            {/* Carrusel autoplay */}
+            <ClientsAutoCarousel photos={clientPhotos} />
           </div>
         </div>
       </section>
@@ -254,6 +240,100 @@ export default function Home() {
         </div>
       </section>
     </>
+  )
+}
+
+function ClientsAutoCarousel({ photos }: { photos: StaticImageData[] }) {
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const [active, setActive] = useState(0)
+
+  // autoplay cada 2s
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % photos.length)
+    }, 2500)
+    return () => clearInterval(id)
+  }, [photos.length])
+
+  // al cambiar active, scroll al card correspondiente (sin “bajar la página”)
+  useEffect(() => {
+    const el = trackRef.current
+    if (!el) return
+
+    const card = el.querySelector<HTMLElement>(`[data-idx="${active}"]`)
+    if (!card) return
+
+    const target =
+      card.offsetLeft - (el.clientWidth / 2 - card.clientWidth / 2)
+
+    el.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
+  }, [active])
+
+  return (
+    <div className="relative">
+      {/* Fade laterales premium */}
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-10 md:w-16 bg-gradient-to-r from-black/60 to-transparent z-10 rounded-l-lg" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-10 md:w-16 bg-gradient-to-l from-black/60 to-transparent z-10 rounded-r-lg" />
+
+      <div
+        ref={trackRef}
+        className="
+          flex gap-6 md:gap-8
+          overflow-x-auto scroll-smooth snap-x snap-mandatory
+          px-2 md:px-4
+          [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar:hidden]
+        "
+      >
+        {photos.map((photo, i) => (
+          <div
+            key={i}
+            data-idx={i}
+            className="
+              snap-center shrink-0
+              w-[260px] sm:w-[300px]
+              md:w-[340px] lg:w-[360px]
+            "
+          >
+            <div
+              className="
+                h-full rounded-lg border border-yellow-700
+                bg-[#0b0b0b]/90 shadow-md
+                p-4 md:p-5
+              "
+            >
+              {/* Imagen 9:16 */}
+              <div className="relative w-full aspect-[1/1] rounded-md overflow-hidden border border-yellow-700/40">
+                <Image
+                  src={photo}
+                  alt={`Client ${i + 1}`}
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 640px) 260px, (max-width: 1024px) 340px, 360px"
+                  priority={i === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+              </div>
+
+              <div className="mt-4 flex items-center justify-between">
+                <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/80">
+                  Client Cut
+                </p>
+                <span className="text-xs text-yellow-300/70">
+                  {i + 1}/{photos.length}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Hint móvil */}
+      <div className="mt-5 text-center md:text-left">
+        <span className="text-xs text-yellow-300/70 select-none ml-24">
+          Auto showcase • Swipe to explore →
+        </span>
+      </div>
+    </div>
   )
 }
 
