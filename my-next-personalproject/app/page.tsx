@@ -155,7 +155,7 @@ export default function Home() {
       {/* CARRUSEL DE PRODUCTOS — entre los dos heroes */}
       <section className="relative z-20 -mt-10 md:-mt-16 bg-black">
         <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20">
-          <div className="text-center mt-10 mb-8">
+          <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-white mb-2">Premium Products</h2>
             <p className="text-yellow-300 text-sm md:text-base">
               Keep your Godfather finish sharp at home
@@ -184,7 +184,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black/65" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 to-transparent" />
-        
+
         {/* Contenido */}
         <div className="relative z-10 h-full flex items-center">
           <div className="container mx-auto px-4 py-14 md:py-0">
@@ -205,6 +205,134 @@ export default function Home() {
 
             {/* Carrusel autoplay */}
             <ClientsAutoCarousel photos={clientPhotos} />
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT SOCIAL MEDIA */}
+      <section className="relative z-20 -mt-10 md:-mt-16 bg-black">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <div className="text-center mb-10">
+            <p className="text-xs uppercase tracking-[0.35em] text-yellow-400/80 mb-3">
+              Stay Connected
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              Contact & Social
+            </h2>
+            <p className="text-yellow-300/90 text-sm md:text-base">
+              Book, ask, or follow the Godfather experience.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {/* LEFT: Info + Social */}
+            <div className="rounded-lg border border-yellow-700/60 bg-[#0b0b0b]/95 p-6 md:p-8 shadow-md">
+              <h3 className="text-xl font-bold text-white mb-6">Barbershop Moncloa</h3>
+
+              <div className="space-y-5">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/70 mb-2">
+                    Address
+                  </p>
+                  <p className="text-yellow-200/95 leading-relaxed">
+                    c/ Princesa 98, Intercambiador Moncloa <br />
+                    Floor -2, Local BARBERIA, Madrid
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/70 mb-2">
+                      Phone
+                    </p>
+                    <a
+                      href="tel:+34688455701"
+                      className="text-yellow-300 hover:text-white transition"
+                    >
+                      +34 688 455 701
+                    </a>
+                  </div>
+
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/70 mb-2">
+                      Booking
+                    </p>
+                    <a
+                      href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-yellow-300 hover:text-white transition"
+                    >
+                      Open Booksy →
+                    </a>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/70 mb-2">
+                    Hours
+                  </p>
+                  <p className="text-yellow-200/95 leading-relaxed">
+                    Mon–Fri: 10:00 – 19:30 <br />
+                    Sat: 09:00 – 14:00
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/70 mb-3">
+                    Follow us
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <a
+                      href="https://www.instagram.com/barberiagodfather"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-md border border-yellow-700/70 bg-black/30 px-4 py-3 text-yellow-300 hover:bg-yellow-500 hover:text-black transition"
+                    >
+                      Instagram
+                    </a>
+
+                    <a
+                      href="https://wa.me/34688455701"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-md border border-yellow-700/70 bg-black/30 px-4 py-3 text-yellow-300 hover:bg-yellow-500 hover:text-black transition"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
+
+                  <p className="mt-4 text-xs text-yellow-300/60">
+                    Quick tip: on mobile, WhatsApp opens instantly.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: Map */}
+            <div className="rounded-lg border border-yellow-700/60 bg-[#0b0b0b]/95 shadow-md overflow-hidden">
+              <div className="p-4 md:p-5 border-b border-yellow-700/40">
+                <p className="text-xs uppercase tracking-[0.25em] text-yellow-300/70">
+                  Find us on the map
+                </p>
+              </div>
+
+              <div className="relative w-full h-[320px] md:h-[420px]">
+                <iframe
+                  title="Ubicación Barbería Godfather"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.323273312608!2d-3.7223456846074767!3d40.434487979362565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229a63215d623%3A0xebb003bf7b7dcea9!2sBarberia%20GodFather!5e0!3m2!1ses!2ses!4v1721439308567!5m2!1ses!2ses"
+                  width="100%"
+                  height="90%"
+                  loading="lazy"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                {/* Overlay sutil para que combine con tu estética */}
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-yellow-700/30" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -329,7 +457,7 @@ function ClientsAutoCarousel({ photos }: { photos: StaticImageData[] }) {
 
       {/* Hint móvil */}
       <div className="mt-5 text-center md:text-left">
-        <span className="text-xs text-yellow-300/70 select-none ml-24">
+        <span className="text-xs text-yellow-300/70 select-none ml-20 md:ml-0">
           Auto showcase • Swipe to explore →
         </span>
       </div>

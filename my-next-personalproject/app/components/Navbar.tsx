@@ -130,7 +130,7 @@ export default function Navbar() {
       </aside>
 
       {/* Spacer para que el contenido no quede debajo del nav fijo */}
-      <div className="h-[72px] md:h-[72px]" />
+      
     </>
   )
 }
