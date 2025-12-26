@@ -94,14 +94,6 @@ const products: ProductCardProps[] = [
 
 export default function Home() {
   const clientPhotos = [c1, c2, c3, c4, c5, c6, c7, c8, c9]
-  const [activeClient, setActiveClient] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActiveClient((prev: number) => (prev + 1) % clientPhotos.length)
-    }, 2000)
-    return () => clearInterval(id)
-  }, [])
 
   return (
     <>
@@ -124,7 +116,7 @@ export default function Home() {
 
         {/* Contenido */}
         <div className="relative z-10 flex items-center justify-end px-4 py-20 md:py-0 h-full">
-          <div className="text-center text-yellow-300 max-w-3xl">
+          <div className="text-center text-yellow-300 max-w-3xl mt-10 md:mt-0">
             <div className="flex justify-center mb-6 -mt-10">
               <Image
                 src={logoGf}
@@ -156,7 +148,9 @@ export default function Home() {
       <section className="relative z-20 -mt-10 md:-mt-16 bg-black">
         <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-white mb-2">Premium Products</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">
+              Premium Products
+            </h2>
             <p className="text-yellow-300 text-sm md:text-base">
               Keep your Godfather finish sharp at home
             </p>
@@ -227,7 +221,9 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {/* LEFT: Info + Social */}
             <div className="rounded-lg border border-yellow-700/60 bg-[#0b0b0b]/95 p-6 md:p-8 shadow-md">
-              <h3 className="text-xl font-bold text-white mb-6">Barbershop Moncloa</h3>
+              <h3 className="text-xl font-bold text-white mb-6">
+                Barbershop Moncloa
+              </h3>
 
               <div className="space-y-5">
                 <div>
@@ -329,7 +325,6 @@ export default function Home() {
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
                 />
-                {/* Overlay sutil para que combine con tu estética */}
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-yellow-700/30" />
               </div>
             </div>
@@ -339,10 +334,8 @@ export default function Home() {
 
       {/* HERO INFERIOR — espejo visual */}
       <section className="relative min-h-[70vh] md:h-screen overflow-hidden bg-black">
-        <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20">
+        <div className="container mx-auto px-2 pt-5 pb-1 md:pt-16 md:pb-20" />
 
-        </div>
-        {/* Imagen rotada pero mismo fill */}
         <Image
           src={barberTools}
           alt="Barber tools background inverted"
@@ -354,11 +347,9 @@ export default function Home() {
           sizes="100vw"
         />
 
-        {/* Overlays (idénticos para coherencia visual) */}
         <div className="absolute inset-0 bg-black/55" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
 
-        {/* Texto inferior */}
         <div className="relative z-10 flex items-center justify-center px-4 py-20 md:py-0 h-full">
           <div className="text-center text-yellow-300 max-w-3xl">
             <p className="text-lg md:text-xl mb-8 text-yellow-200/95">
@@ -373,15 +364,34 @@ export default function Home() {
 
 function ClientsAutoCarousel({ photos }: { photos: StaticImageData[] }) {
   const trackRef = useRef<HTMLDivElement | null>(null)
-  const [active, setActive] = useState(0)
 
-  // autoplay cada 2s
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const [active, setActive] = useState(0)
+  const [isAutoPlay, setIsAutoPlay] = useState(true)
+
+  const stopAutoPlay = () => {
+    setIsAutoPlay(false)
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }
+
+  // autoplay cada 2.5s (se detiene en cuanto el usuario interactúa)
   useEffect(() => {
-    const id = setInterval(() => {
+    if (!isAutoPlay) return
+
+    intervalRef.current = setInterval(() => {
       setActive((prev) => (prev + 1) % photos.length)
     }, 2500)
-    return () => clearInterval(id)
-  }, [photos.length])
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [isAutoPlay, photos.length])
 
   // al cambiar active, scroll al card correspondiente (sin “bajar la página”)
   useEffect(() => {
@@ -391,8 +401,7 @@ function ClientsAutoCarousel({ photos }: { photos: StaticImageData[] }) {
     const card = el.querySelector<HTMLElement>(`[data-idx="${active}"]`)
     if (!card) return
 
-    const target =
-      card.offsetLeft - (el.clientWidth / 2 - card.clientWidth / 2)
+    const target = card.offsetLeft - (el.clientWidth / 2 - card.clientWidth / 2)
 
     el.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
   }, [active])
@@ -405,6 +414,10 @@ function ClientsAutoCarousel({ photos }: { photos: StaticImageData[] }) {
 
       <div
         ref={trackRef}
+        onPointerDown={stopAutoPlay}
+        onTouchStart={stopAutoPlay}
+        onWheel={stopAutoPlay}
+        onScroll={stopAutoPlay}
         className="
           flex gap-6 md:gap-8
           overflow-x-auto scroll-smooth snap-x snap-mandatory
@@ -429,7 +442,7 @@ function ClientsAutoCarousel({ photos }: { photos: StaticImageData[] }) {
                 p-4 md:p-5
               "
             >
-              {/* Imagen 9:16 */}
+              {/* Imagen 1:1 */}
               <div className="relative w-full aspect-[1/1] rounded-md overflow-hidden border border-yellow-700/40">
                 <Image
                   src={photo}
@@ -474,10 +487,11 @@ function ProductCard({
   size
 }: ProductCardProps) {
   return (
-    <div className="h-full rounded-lg border border-yellow-700 bg-[#0b0b0b]/95 
+    <div
+      className="h-full rounded-lg border border-yellow-700 bg-[#0b0b0b]/95 
                 p-6 md:p-8 flex flex-col shadow-md 
-                md:min-h-[420px]">
-      {/* Placeholder para imagen del producto */}
+                md:min-h-[420px]"
+    >
       <div className="mb-4 h-54 rounded-md border border-yellow-700/40 bg-gradient-to-br from-yellow-500/10 via-yellow-700/5 to-yellow-900/15 flex items-center justify-center text-[0.65rem] uppercase tracking-[0.2em] text-yellow-300/70">
         Product image
       </div>
@@ -492,7 +506,10 @@ function ProductCard({
         <span className="text-sm font-semibold text-yellow-300">{price}</span>
       </div>
 
-      <p className="text-xs text-yellow-300/80 mb-2">{category}{size ? ` • ${size}` : ''}</p>
+      <p className="text-xs text-yellow-300/80 mb-2">
+        {category}
+        {size ? ` • ${size}` : ''}
+      </p>
 
       <p className="text-sm text-yellow-100/90 mb-4 flex-1">{description}</p>
 

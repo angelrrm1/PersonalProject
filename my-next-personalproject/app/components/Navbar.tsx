@@ -52,11 +52,11 @@ export default function Navbar() {
             <Link href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo" className="hover:text-white">Booking</Link>
             <Link href="/pricing" className="hover:text-white">Services</Link>
             <Link href="/contact" className="hover:text-white">Contact</Link>
-            <Link href="#" className="hover:text-white">About Us</Link>
+           
           </nav>
 
           {/* Acciones desktop */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* <div className="hidden md:flex items-center gap-6">
             <button aria-label="cart" className="text-yellow-300 hover:text-white">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
@@ -65,7 +65,7 @@ export default function Navbar() {
               </svg>
             </button>
             <Link href="#" className="text-yellow-300 hover:text-white">Login</Link>
-          </div>
+          </div> */}
 
           {/* Hamburguesa móvil */}
           <button

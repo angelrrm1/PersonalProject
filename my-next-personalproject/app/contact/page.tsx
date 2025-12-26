@@ -13,7 +13,7 @@ export default function ContactPage() {
       <div className="absolute inset-0 bg-black/70" />
 
       {/* Contenido */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 text-yellow-300">
+      <div className="relative z-10 max-w-6xl mt-10 mx-auto px-4 py-16 text-yellow-300">
         <h1 className="text-4xl font-bold text-white text-center mb-10">Contact Us</h1>
 
         {/* Grid 2 col — alturas iguales */}

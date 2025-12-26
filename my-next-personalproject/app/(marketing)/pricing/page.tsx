@@ -131,7 +131,7 @@ export default function ServicesPage() {
 
       {/* Contenido centrado y con padding */}
       <div className="container mx-auto px-4 py-12 relative z-10">
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <div className="max-w-2xl mx-auto text-center mt-16 mb-16">
           <h1 className="text-4xl font-bold mb-4 text-white">Services</h1>
           <p className="text-xl text-yellow-300">Premium barbershop experience</p>
         </div>
